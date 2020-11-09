@@ -1,0 +1,29 @@
+version: '3'
+services:
+  api:
+      build: "./app"
+      environment:
+        MONGODB_DATABASE: temp_store
+        MONGODB_USERNAME: primary
+        MONGODB_PASSWORD: primary
+        MONGODB_HOSTNAME: mongodb
+      ports:
+        - "5000:5000"
+      links: 
+        - mongodb
+  mongodb:
+    build: "./db"    
+    environment:
+      MONGO_INITDB_ROOT_USERNAME: "root"
+      MONGO_INITDB_ROOT_PASSWORD: "the_password"
+      MONGO_INITDB_DATABASE: "temp_store"
+    ports: 
+      - 27017:27017
+    volumes:
+      - ./mongo-init.js:/docker-entrypoint-initdb.d/mongo-init.js:ro
+      - type: volume
+        source: mongodb_data_volume 
+        target: /data/db
+volumes:
+  mongodb_data_volume:
+      external: true
