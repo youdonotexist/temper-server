@@ -1,4 +1,4 @@
-version: '3'
+version: '3.2'
 services:
   api:
       build: "./app"
@@ -20,7 +20,7 @@ services:
     ports: 
       - 27017:27017
     volumes:
-      - ./mongo-init.js:/docker-entrypoint-initdb.d/mongo-init.js:ro
+      - ./docker-entrypoint-initdb.d/mongo-init.js:/docker-entrypoint-initdb.d/mongo-init.js:ro
       - type: volume
         source: mongodb_data_volume 
         target: /data/db
