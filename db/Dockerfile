@@ -1,2 +1,2 @@
-FROM mongo:3.6.4
+FROM mongo:latest
 RUN ["chmod", "+x", "/docker-entrypoint-initdb.d/mongo-init.js"]
