@@ -13,8 +13,15 @@ class Database():
 
     def getTemps(self):
         temps = list(self.client.db.temp.find({}))
-        tempTransform = []
-        for temp in temps:
-            tempTransform.append({"temp": temp['temp'], "timestamp": temp.get('timestamp', 0)})
+        return self.tempTransform(temps)
 
+    def getAverage(self):
+        after = time.time() - (60 * 60 * 24 * 30)
+        temps = self.client.db.temp.find({"timestamp": {"$gt": after}})
+        return self.tempTransform(temps)
+
+    def tempTransform(self, tempData):
+        tempTransform = []
+        for temp in tempData:
+            tempTransform.append({"temp": temp['temp'], "timestamp": temp.get('timestamp', 0)})
         return tempTransform

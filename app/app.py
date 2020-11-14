@@ -20,6 +20,11 @@ def getTemps():
     data = database.getTemps()
     return jsonify(data)
 
+@app.route('/average', methods=['GET'])
+def getAverage():
+    data = database.getAverage()
+    return jsonify(data)
+
 
 if __name__ == "__main__":
     app.run(debug=True, host='0.0.0.0')
