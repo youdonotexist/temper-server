@@ -25,6 +25,11 @@ def getAverage():
     data = database.getAverage()
     return jsonify(data)
 
+@app.route('/latest', methods=['GET'])
+def getLatest():
+    data = database.getLatest()
+    return jsonify(data)
+
 
 if __name__ == "__main__":
     app.run(debug=True, host='0.0.0.0')

@@ -23,6 +23,8 @@ services:
       - type: volume
         source: mongodb_data_volume 
         target: /data/db
+  front-end:
+    build: "./front-end"
 volumes:
   mongodb_data_volume:
       external: true

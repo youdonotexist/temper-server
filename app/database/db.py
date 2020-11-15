@@ -20,6 +20,10 @@ class Database():
         temps = self.client.db.temp.find({"timestamp": {"$gt": after}})
         return self.tempTransform(temps)
 
+    def getLatest(self):
+        temp = self.client.db.temp.find({'timestamp':-1}).limit(1)
+        return self.tempTransform([temp])
+
     def tempTransform(self, tempData):
         tempTransform = []
         for temp in tempData:
