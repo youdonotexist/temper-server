@@ -22,7 +22,7 @@ class Database():
 
     def getLatest(self):
         temp = self.client.db.temp.find({'timestamp':-1}).limit(1)
-        return self.tempTransform([temp])
+        return self.tempTransform(temp)
 
     def tempTransform(self, tempData):
         tempTransform = []
