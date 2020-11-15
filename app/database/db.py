@@ -21,7 +21,7 @@ class Database():
         return self.tempTransform(temps)
 
     def getLatest(self):
-        temp = self.client.db.temp.find({'timestamp':-1}).limit(1)
+        temp = self.client.db.temp.find().sort({'timestamp':-1}).limit(1)
         return self.tempTransform(temp)
 
     def tempTransform(self, tempData):
