@@ -8,7 +8,7 @@ services:
         MONGODB_PASSWORD: primary
         MONGODB_HOSTNAME: mongodb
       ports:
-        - "5000:5000"
+        - "5022:5022"
       links: 
         - mongodb
   mongodb:
@@ -25,6 +25,8 @@ services:
         target: /data/db
   front-end:
     build: "./front-end"
+  notification-service:
+      build: "./notification-service"
 volumes:
   mongodb_data_volume:
       external: true

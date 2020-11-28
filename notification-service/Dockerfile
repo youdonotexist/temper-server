@@ -1,6 +1,6 @@
 FROM python:3.6
 
-WORKDIR /usr/src/app
+WORKDIR /usr/src/notification-service
 
 COPY requirements.txt ./
 
