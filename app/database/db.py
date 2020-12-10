@@ -18,10 +18,23 @@ class Database():
     def getAverage(self):
         after = time.time() - (60 * 60 * 24 * 30)
         temps = self.client.db.temp.find({"timestamp": {"$gt": after}})
-        return self.tempTransform(temps)
+
+        avg = 0
+        for temp in temps:
+            avg += temp['temp']
+
+        avg /= temps.count()
+        
+        return {"temp": avg}
 
     def getLatest(self):
         temp = self.client.db.temp.find().sort('timestamp', -1).limit(1)
+        return self.tempTransform(temp)
+
+    def getLast30(self):
+        #after 30 days
+        after = time.time() - (60 * 60 * 24 * 30)
+        temp = self.client.db.temp.find({"timestamp": {"$gt": after}})
         return self.tempTransform(temp)
 
     def tempTransform(self, tempData):

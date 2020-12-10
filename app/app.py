@@ -30,6 +30,10 @@ def getLatest():
     data = database.getLatest()
     return jsonify(data)
 
+@app.route('last30', methods=['GET'])
+def getLast30():
+    data = database.getLast30()
+    return jsonify(data)
 
 if __name__ == "__main__":
     app.run(debug=True, host='0.0.0.0')
