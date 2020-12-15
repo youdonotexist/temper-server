@@ -1,12 +1,13 @@
 import os
-from flask import Flask, request, jsonify, json
+from flask import Flask, request, jsonify, json, Api
 from database.db import Database
 from service.api import init_api
 
 app = Flask(__name__)
+api = Api(app)
+
 app.config["MONGO_URI"] = 'mongodb://' + os.environ['MONGODB_USERNAME'] + ':' + os.environ['MONGODB_PASSWORD'] + '@' + os.environ['MONGODB_HOSTNAME'] + ':27017/' + os.environ['MONGODB_DATABASE']
 
-init_api(app)
 database = Database(app)
 
 @app.route('/saveTemp', methods=['POST'])
